@@ -1,23 +1,24 @@
 
 section .data
-  arr db 3,4,5,1
+  arr db 3, 4, 9, 1
   size db $-arr
    global main;
    global CMAIN;
   global _start
+ p_end dd 1
+  min db 1
 section .bss
-  min resb 1
- p_end resd 1
 section .text
    main:
-  ; CMAIN:
     mov ebp, esp; for correct debugging
-  _start:
+  ; CMAIN:
+  ;_start:
   ; x/4xb &arr
     mov eax, p_end
-    mov DWORD[eax], 0
+    mov DWORD[eax], arr
     L1:
-    add DWORD[eax], size
+    movzx ebx, BYTE[size]
+    add DWORD[eax], ebx
     ddd:
     mov eax, min
     movzx ebx, BYTE[arr]
@@ -27,11 +28,11 @@ section .text
 ;    mov BYTE[eax], 6
     while:
       cmp eax, [p_end]
-      jne exit_while; jump if not equal
+      je exit_while; jump if not equal
       mov ebx, eax; x
       for:
         cmp ebx, [p_end]
-        jne exit_for
+        je exit_for
           movzx ecx, BYTE[min]
           movzx edx, BYTE[ebx]
           cmp ecx, edx
