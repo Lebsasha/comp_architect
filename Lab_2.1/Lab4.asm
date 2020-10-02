@@ -15,8 +15,10 @@ section .text
   _start:
   ; x/4xb &arr
     mov eax, p_end
-    mov DWORD[eax], arr
+    mov DWORD[eax], 0
+    L1:
     add DWORD[eax], size
+    ddd:
     mov eax, min
     movzx ebx, BYTE[arr]
     mov [eax], ebx
