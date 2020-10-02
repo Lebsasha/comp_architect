@@ -3,16 +3,16 @@ section .data
   arr db 3,4,5,1
   size db $-arr
    global main;
-  ; global CMAIN;
- ; global _start
+   global CMAIN;
+  global _start
 section .bss
   min resb 1
  p_end resd 1
 section .text
    main:
-    mov ebp, esp; for correct debugging
   ; CMAIN:
-  ;_start:
+    mov ebp, esp; for correct debugging
+  _start:
   ; x/4xb &arr
     mov eax, p_end
     mov DWORD[eax], arr
