@@ -20,11 +20,31 @@ section .text
   mov ebx, [m]
   cmp eax, ebx
   je true
+  
+  cmp eax, ebx
+  jg if_k_m
+  mov eax, k
+  mov ebx, [eax]
+  mov ecx, [m]
+  mov [eax], ecx
+  mov ecx, m
+  mov [ecx], ebx
+  if_k_m:
 
   mov eax, [l]
   mov ebx, [n]
   cmp eax, ebx
   je true
+
+  cmp eax, ebx
+  jg if_l_n
+  mov eax, l
+  mov ebx, [eax]
+  mov ecx, [n]
+  mov [eax], ecx
+  mov ecx, n
+  mov [ecx], ebx
+  if_l_n:
 
   mov eax, [k]
   sub eax, [m]
