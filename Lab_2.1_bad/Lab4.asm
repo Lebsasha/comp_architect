@@ -1,7 +1,7 @@
 
 section .data
-  arr dd 3, 4, 9, 1
-  size db 4;$-arr
+  arr dd 3, 10, 90, 1
+  size db 16; 4*4 $-arr
    global main;
    global CMAIN;
   global _start
@@ -14,6 +14,8 @@ section .text
   ; CMAIN:
   ;_start:
   ; x/4xb &arr
+  ; p (int*)(p_end)
+  ; p (int*)(&arr)
     mov eax, p_end
     mov DWORD[eax], arr
     L1:
@@ -22,7 +24,7 @@ section .text
     add DWORD[eax], ebx
     ddd:
     mov eax, min
-    mov ebx, [arr]
+    mov ebx, arr
     mov [eax], ebx
     mov eax, 0
     mov eax, arr; p
@@ -34,24 +36,28 @@ section .text
       for:
         cmp ebx, [p_end]
         je exit_for
-          movzx ecx, BYTE[min]
-          movzx edx, BYTE[ebx]
-          cmp ecx, edx
-          jnl exit_if
-          mov ecx, min
+          mov ecx, [min]
           mov edx, [ebx]
+          cmp [ecx], edx
+          jl exit_if
+          mov ecx, min
+          mov edx, ebx;Temp edx
           mov [ecx], edx
         exit_if:
-        mov edx, eax
-
+        add ebx, 4
+        ;mov edx, eax
+        jmp for
       exit_for:
       mov ecx, [min]
-      mov [eax], ecx
+      mov edx, [ecx]
+      mov ebx, [eax]
+      mov [ecx], ebx
+      mov [eax], edx
       ; inc eax
-      add eax, 1
-    mov ecx, min
-    movzx edx, BYTE[eax]
-    mov [ecx], edx
+      add eax, 4
+      mov ebx, [p_end]
+      mov [min], ebx
+    ;add DWORD[min], 4
       jmp while
     exit_while:
     ; mov ebx, 1
