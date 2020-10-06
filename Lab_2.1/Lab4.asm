@@ -12,7 +12,7 @@ section .text
    main:
     mov ebp, esp; for correct debugging
   ; CMAIN:
-  _start:
+  ;_start:
   ; x/4xb &arr
     mov eax, p_end
     mov DWORD[eax], arr
