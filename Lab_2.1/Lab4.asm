@@ -12,12 +12,13 @@ section .text
    main:
     mov ebp, esp; for correct debugging
   ; CMAIN:
-  ;_start:
+  _start:
   ; x/4xb &arr
     mov eax, p_end
     mov DWORD[eax], arr
     L1:
     movzx ebx, BYTE[size]
+    L2:
     add DWORD[eax], ebx
     ddd:
     mov eax, min
