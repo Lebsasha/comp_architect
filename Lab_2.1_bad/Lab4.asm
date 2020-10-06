@@ -1,18 +1,18 @@
 
 section .data
-  arr db 3, 4, 9, 1
-  size db $-arr
+  arr dd 3, 4, 9, 1
+  size db 4;$-arr
    global main;
    global CMAIN;
   global _start
  p_end dd 1
-  min db 1
+  min dd 1
 section .bss
 section .text
    main:
     mov ebp, esp; for correct debugging
   ; CMAIN:
-  _start:
+  ;_start:
   ; x/4xb &arr
     mov eax, p_end
     mov DWORD[eax], arr
@@ -22,7 +22,7 @@ section .text
     add DWORD[eax], ebx
     ddd:
     mov eax, min
-    movzx ebx, BYTE[arr]
+    mov ebx, [arr]
     mov [eax], ebx
     mov eax, 0
     mov eax, arr; p
@@ -47,7 +47,11 @@ section .text
       exit_for:
       mov ecx, [min]
       mov [eax], ecx
-      inc eax
+      ; inc eax
+      add eax, 1
+    mov ecx, min
+    movzx edx, BYTE[eax]
+    mov [ecx], edx
       jmp while
     exit_while:
     ; mov ebx, 1
