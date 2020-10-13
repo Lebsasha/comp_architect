@@ -1,4 +1,4 @@
-#include <math.h>
+//#include <math.h>
 int pow (int x, int i)
 {
 	int ans=1;
@@ -20,6 +20,6 @@ for(int i=0;i<n;++i)
 }
 int sum1=111;
 sum1-=111;
-sum1=11*(pow(-2, n)-1)/((-2)-1);
+sum1=1*(pow(-2, n)-1)/((-2)-1);
 return sum-sum1;
 } 

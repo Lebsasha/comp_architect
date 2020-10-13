@@ -1,7 +1,9 @@
 section .data
 n dd 219 ;195
 sum dd 0;
-
+x dd 0
+i dd 0
+result dd 0
 global _start
 global main
 global CMAIN
@@ -10,31 +12,12 @@ section .text
   main:
   mov ebp, esp; for correct debugging
   CMAIN:
-  _start:
+  ;_start:
   
 
 
-1125:
-push   rbp
-    mov    rbp,rsp
-    mov    DWORD PTR [rbp-0x14],edi
-    mov    DWORD PTR [rbp-0x18],esi
-    mov    DWORD PTR [rbp-0x4],0x1
-    mov    eax,DWORD PTR [rbp-0x18]
-    lea    edx,[rax-0x1]
-    mov    DWORD PTR [rbp-0x18],edx
-    test   eax,eax
-    setne  al
-    test   al,al
-    je     1152 <_Z3powii+0x2d>
-    mov    eax,DWORD PTR [rbp-0x4]
-    imul   eax,DWORD PTR [rbp-0x14]
-    mov    DWORD PTR [rbp-0x4],ea
-1152:	mov    eax,DWORD PTR [rbp-0x4]
-    pop    rbp
-    ret    
 
-0000000000001157 <main>:
+; 0000000000001157 <main>:
     ; push   rbp
     ; mov    rbp,rsp
     ; sub    rsp,0x20
@@ -60,26 +43,58 @@ push   rbp
     sub    DWORD [sum], 0x6f
     mov    esi,0x5
     mov    edi,0xfffffffe
-    call   1125
-    lea    edx,[rax-0x1]
-    mov    eax,edx
-    shl    eax,0x2
-    add    eax,edx
-    add    eax,eax
-    lea    ecx,[rax+rdx*1]
-    mov    edx,0x55555556
-    mov    eax,ecx
-    imul   edx
-    mov    eax,ecx
-    sar    eax,0x1f
-    sub    eax,edx
-    mov    DWORD [rbp-0x14],eax
+    call   pow
+    lea    eax,[eax-0x1]
+    ; mov    eax,edx
+    ; shl    eax,0x2 edx*4
+    ; add    eax,edx *5
+    ; add    eax,eax *10
+    ; lea    ecx,[rax+rdx*1] *11
+    mov ebx, 1
+    mul ebx;
+    lea esi, [2+1]
+    idiv esi;
+    sub ecx, eax
+    mov eax, ecx
+;     mov    edx,0x55555556
+;     mov    eax,ecx
+;     imul   edx
+;     mov    eax,ecx
+;     sar    eax,0x1f
+;     sub    eax,edx
+;     mov    DWORD [rbp-0x14],eax
 
-; mov    eax,DWORD PTR [rbp-0x4] ;temp
-sub    eax,DWORD [rbp-0x14]
-ret;
-esi
+; ; mov    eax,DWORD PTR [rbp-0x4] ;temp
+; mov    eax,DWORD [rbp-0x14]
 
+ret;;;;
+
+
+
+
+pow:
+;push   rbp
+;    mov    rbp,rsp
+    mov    DWORD [x],edi
+    mov    DWORD [i],esi
+    mov    DWORD [result],0x1
+while:
+    mov    eax,DWORD [i]
+    lea    edx,[eax-0x1]
+    mov    DWORD [i],edx
+    test   eax,eax
+    ;setne  al
+    ;test   al,al
+    je     exit_while
+    mov    eax,DWORD [result]
+    imul   eax,DWORD [x]
+    mov    DWORD [result],eax
+    ;dec DWORD[i];
+    jmp while;
+exit_while:
+    mov    eax, [result]
+;    pop    rbp
+    ret    
 
 
 ; mov    DWORD PTR [n],0x5
