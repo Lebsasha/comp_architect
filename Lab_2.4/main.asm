@@ -1,6 +1,6 @@
 section .data
-n dd 219;195
-if_palindrom dd 1
+n dd 219 ;195
+if_palindrom db 1
 global _start
 global main
 global CMAIN
@@ -30,31 +30,12 @@ for:
     and    eax,0x1
       test   eax,eax
       je     if
-      mov   DWORD [if_palindrom],0x0
+      mov   BYTE [if_palindrom],0x0
 if:
   add    ebx,0x1
   jmp    for
 
 exit:
 mov eax, 1;
-mov  ebx, [if_palindrom]
+mov  ebx, BYTE[if_palindrom]
 int 80h;
-
-
-
-
-
-
-  ; false:
-  ; mov eax, 0
-  ; jmp exit; end
-
-  ; true:
-  ; mov eax, 1
-  ; ; x/4xb &arr
-  ; ; p (int*)(p_end)
-  ; ; p (int*)(&arr)
-  ; exit:
-  ; mov eax, 1;
-  ; mov ebx, 0;
-  ; int 80h;
