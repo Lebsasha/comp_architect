@@ -36,9 +36,9 @@ Disassembly of section .text:
     1049:	48 83 e4 f0          	and    rsp,0xfffffffffffffff0
     104d:	50                   	push   rax
     104e:	54                   	push   rsp
-    104f:	4c 8d 05 ea 01 00 00 	lea    r8,[rip+0x1ea]        # 1240 <__libc_csu_fini>
-    1056:	48 8d 0d 83 01 00 00 	lea    rcx,[rip+0x183]        # 11e0 <__libc_csu_init>
-    105d:	48 8d 3d f3 00 00 00 	lea    rdi,[rip+0xf3]        # 1157 <main>
+    104f:	4c 8d 05 fa 01 00 00 	lea    r8,[rip+0x1fa]        # 1250 <__libc_csu_fini>
+    1056:	48 8d 0d 93 01 00 00 	lea    rcx,[rip+0x193]        # 11f0 <__libc_csu_init>
+    105d:	48 8d 3d 1e 01 00 00 	lea    rdi,[rip+0x11e]        # 1182 <main>
     1064:	ff 15 7e 2f 00 00    	call   QWORD PTR [rip+0x2f7e]        # 3fe8 <__libc_start_main@GLIBC_2.2.5>
     106a:	f4                   	hlt    
     106b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
@@ -95,108 +95,118 @@ Disassembly of section .text:
 0000000000001120 <frame_dummy>:
     1120:	e9 7b ff ff ff       	jmp    10a0 <register_tm_clones>
 
-0000000000001125 <_Z3powii>:
+0000000000001125 <_Z8if_5_powi>:
     1125:	55                   	push   rbp
     1126:	48 89 e5             	mov    rbp,rsp
-    1129:	89 7d ec             	mov    DWORD PTR [rbp-0x14],edi
-    112c:	89 75 e8             	mov    DWORD PTR [rbp-0x18],esi
-    112f:	c7 45 fc 01 00 00 00 	mov    DWORD PTR [rbp-0x4],0x1
-    1136:	8b 45 e8             	mov    eax,DWORD PTR [rbp-0x18]
-    1139:	8d 50 ff             	lea    edx,[rax-0x1]
-    113c:	89 55 e8             	mov    DWORD PTR [rbp-0x18],edx
-    113f:	85 c0                	test   eax,eax
-    1141:	0f 95 c0             	setne  al
-    1144:	84 c0                	test   al,al
-    1146:	74 0a                	je     1152 <_Z3powii+0x2d>
-    1148:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
-    114b:	0f af 45 ec          	imul   eax,DWORD PTR [rbp-0x14]
-    114f:	89 45 fc             	mov    DWORD PTR [rbp-0x4],eax
-    1152:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
-    1155:	5d                   	pop    rbp
-    1156:	c3                   	ret    
+    1129:	89 7d fc             	mov    DWORD PTR [rbp-0x4],edi
+    112c:	83 7d fc 01          	cmp    DWORD PTR [rbp-0x4],0x1
+    1130:	74 49                	je     117b <_Z8if_5_powi+0x56>
+    1132:	8b 4d fc             	mov    ecx,DWORD PTR [rbp-0x4]
+    1135:	ba 67 66 66 66       	mov    edx,0x66666667
+    113a:	89 c8                	mov    eax,ecx
+    113c:	f7 ea                	imul   edx
+    113e:	d1 fa                	sar    edx,1
+    1140:	89 c8                	mov    eax,ecx
+    1142:	c1 f8 1f             	sar    eax,0x1f
+    1145:	29 c2                	sub    edx,eax
+    1147:	89 d0                	mov    eax,edx
+    1149:	89 c2                	mov    edx,eax
+    114b:	c1 e2 02             	shl    edx,0x2
+    114e:	01 c2                	add    edx,eax
+    1150:	89 c8                	mov    eax,ecx
+    1152:	29 d0                	sub    eax,edx
+    1154:	85 c0                	test   eax,eax
+    1156:	75 1c                	jne    1174 <_Z8if_5_powi+0x4f>
+    1158:	8b 4d fc             	mov    ecx,DWORD PTR [rbp-0x4]
+    115b:	ba 67 66 66 66       	mov    edx,0x66666667
+    1160:	89 c8                	mov    eax,ecx
+    1162:	f7 ea                	imul   edx
+    1164:	d1 fa                	sar    edx,1
+    1166:	89 c8                	mov    eax,ecx
+    1168:	c1 f8 1f             	sar    eax,0x1f
+    116b:	29 c2                	sub    edx,eax
+    116d:	89 d0                	mov    eax,edx
+    116f:	89 45 fc             	mov    DWORD PTR [rbp-0x4],eax
+    1172:	eb b8                	jmp    112c <_Z8if_5_powi+0x7>
+    1174:	b8 00 00 00 00       	mov    eax,0x0
+    1179:	eb 05                	jmp    1180 <_Z8if_5_powi+0x5b>
+    117b:	b8 01 00 00 00       	mov    eax,0x1
+    1180:	5d                   	pop    rbp
+    1181:	c3                   	ret    
 
-0000000000001157 <main>:
-    1157:	55                   	push   rbp
-    1158:	48 89 e5             	mov    rbp,rsp
-    115b:	48 83 ec 20          	sub    rsp,0x20
-    115f:	c7 45 f0 05 00 00 00 	mov    DWORD PTR [rbp-0x10],0x5
-    1166:	c7 45 fc 00 00 00 00 	mov    DWORD PTR [rbp-0x4],0x0
-    116d:	c7 45 f8 0b 00 00 00 	mov    DWORD PTR [rbp-0x8],0xb
-    1174:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [rbp-0xc],0x0
-    117b:	8b 45 f4             	mov    eax,DWORD PTR [rbp-0xc]
-    117e:	83 f8 04             	cmp    eax,0x4
-    1181:	77 1b                	ja     119e <main+0x47>
-    1183:	8b 45 f8             	mov    eax,DWORD PTR [rbp-0x8]
-    1186:	01 45 fc             	add    DWORD PTR [rbp-0x4],eax
-    1189:	8b 55 f8             	mov    edx,DWORD PTR [rbp-0x8]
-    118c:	b8 00 00 00 00       	mov    eax,0x0
-    1191:	29 d0                	sub    eax,edx
-    1193:	01 c0                	add    eax,eax
-    1195:	89 45 f8             	mov    DWORD PTR [rbp-0x8],eax
-    1198:	83 45 f4 01          	add    DWORD PTR [rbp-0xc],0x1
-    119c:	eb dd                	jmp    117b <main+0x24>
-    119e:	c7 45 ec 6f 00 00 00 	mov    DWORD PTR [rbp-0x14],0x6f
-    11a5:	83 6d ec 6f          	sub    DWORD PTR [rbp-0x14],0x6f
-    11a9:	be 05 00 00 00       	mov    esi,0x5
-    11ae:	bf fe ff ff ff       	mov    edi,0xfffffffe
-    11b3:	e8 6d ff ff ff       	call   1125 <_Z3powii>
-    11b8:	8d 48 ff             	lea    ecx,[rax-0x1]
-    11bb:	ba 56 55 55 55       	mov    edx,0x55555556
-    11c0:	89 c8                	mov    eax,ecx
-    11c2:	f7 ea                	imul   edx
-    11c4:	89 c8                	mov    eax,ecx
-    11c6:	c1 f8 1f             	sar    eax,0x1f
-    11c9:	29 d0                	sub    eax,edx
-    11cb:	89 45 ec             	mov    DWORD PTR [rbp-0x14],eax
-    11ce:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
-    11d1:	2b 45 ec             	sub    eax,DWORD PTR [rbp-0x14]
-    11d4:	c9                   	leave  
-    11d5:	c3                   	ret    
-    11d6:	66 2e 0f 1f 84 00 00 	nop    WORD PTR cs:[rax+rax*1+0x0]
-    11dd:	00 00 00 
+0000000000001182 <main>:
+    1182:	55                   	push   rbp
+    1183:	48 89 e5             	mov    rbp,rsp
+    1186:	48 83 ec 30          	sub    rsp,0x30
+    118a:	c7 45 d0 01 00 00 00 	mov    DWORD PTR [rbp-0x30],0x1
+    1191:	c7 45 d4 02 00 00 00 	mov    DWORD PTR [rbp-0x2c],0x2
+    1198:	c7 45 d8 03 00 00 00 	mov    DWORD PTR [rbp-0x28],0x3
+    119f:	c7 45 dc 04 00 00 00 	mov    DWORD PTR [rbp-0x24],0x4
+    11a6:	c7 45 e0 05 00 00 00 	mov    DWORD PTR [rbp-0x20],0x5
+    11ad:	c7 45 fc 00 00 00 00 	mov    DWORD PTR [rbp-0x4],0x0
+    11b4:	48 8d 45 d0          	lea    rax,[rbp-0x30]
+    11b8:	48 89 45 f0          	mov    QWORD PTR [rbp-0x10],rax
+    11bc:	48 8d 45 d0          	lea    rax,[rbp-0x30]
+    11c0:	48 83 c0 14          	add    rax,0x14
+    11c4:	48 39 45 f0          	cmp    QWORD PTR [rbp-0x10],rax
+    11c8:	73 21                	jae    11eb <main+0x69>
+    11ca:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+    11ce:	8b 00                	mov    eax,DWORD PTR [rax]
+    11d0:	89 c7                	mov    edi,eax
+    11d2:	e8 4e ff ff ff       	call   1125 <_Z8if_5_powi>
+    11d7:	84 c0                	test   al,al
+    11d9:	74 09                	je     11e4 <main+0x62>
+    11db:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+    11df:	8b 00                	mov    eax,DWORD PTR [rax]
+    11e1:	01 45 fc             	add    DWORD PTR [rbp-0x4],eax
+    11e4:	48 83 45 f0 04       	add    QWORD PTR [rbp-0x10],0x4
+    11e9:	eb d1                	jmp    11bc <main+0x3a>
+    11eb:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+    11ee:	c9                   	leave  
+    11ef:	c3                   	ret    
 
-00000000000011e0 <__libc_csu_init>:
-    11e0:	41 57                	push   r15
-    11e2:	49 89 d7             	mov    r15,rdx
-    11e5:	41 56                	push   r14
-    11e7:	49 89 f6             	mov    r14,rsi
-    11ea:	41 55                	push   r13
-    11ec:	41 89 fd             	mov    r13d,edi
-    11ef:	41 54                	push   r12
-    11f1:	4c 8d 25 f0 2b 00 00 	lea    r12,[rip+0x2bf0]        # 3de8 <__frame_dummy_init_array_entry>
-    11f8:	55                   	push   rbp
-    11f9:	48 8d 2d f0 2b 00 00 	lea    rbp,[rip+0x2bf0]        # 3df0 <__init_array_end>
-    1200:	53                   	push   rbx
-    1201:	4c 29 e5             	sub    rbp,r12
-    1204:	48 83 ec 08          	sub    rsp,0x8
-    1208:	e8 f3 fd ff ff       	call   1000 <_init>
-    120d:	48 c1 fd 03          	sar    rbp,0x3
-    1211:	74 1b                	je     122e <__libc_csu_init+0x4e>
-    1213:	31 db                	xor    ebx,ebx
-    1215:	0f 1f 00             	nop    DWORD PTR [rax]
-    1218:	4c 89 fa             	mov    rdx,r15
-    121b:	4c 89 f6             	mov    rsi,r14
-    121e:	44 89 ef             	mov    edi,r13d
-    1221:	41 ff 14 dc          	call   QWORD PTR [r12+rbx*8]
-    1225:	48 83 c3 01          	add    rbx,0x1
-    1229:	48 39 dd             	cmp    rbp,rbx
-    122c:	75 ea                	jne    1218 <__libc_csu_init+0x38>
-    122e:	48 83 c4 08          	add    rsp,0x8
-    1232:	5b                   	pop    rbx
-    1233:	5d                   	pop    rbp
-    1234:	41 5c                	pop    r12
-    1236:	41 5d                	pop    r13
-    1238:	41 5e                	pop    r14
-    123a:	41 5f                	pop    r15
-    123c:	c3                   	ret    
-    123d:	0f 1f 00             	nop    DWORD PTR [rax]
+00000000000011f0 <__libc_csu_init>:
+    11f0:	41 57                	push   r15
+    11f2:	49 89 d7             	mov    r15,rdx
+    11f5:	41 56                	push   r14
+    11f7:	49 89 f6             	mov    r14,rsi
+    11fa:	41 55                	push   r13
+    11fc:	41 89 fd             	mov    r13d,edi
+    11ff:	41 54                	push   r12
+    1201:	4c 8d 25 e0 2b 00 00 	lea    r12,[rip+0x2be0]        # 3de8 <__frame_dummy_init_array_entry>
+    1208:	55                   	push   rbp
+    1209:	48 8d 2d e0 2b 00 00 	lea    rbp,[rip+0x2be0]        # 3df0 <__init_array_end>
+    1210:	53                   	push   rbx
+    1211:	4c 29 e5             	sub    rbp,r12
+    1214:	48 83 ec 08          	sub    rsp,0x8
+    1218:	e8 e3 fd ff ff       	call   1000 <_init>
+    121d:	48 c1 fd 03          	sar    rbp,0x3
+    1221:	74 1b                	je     123e <__libc_csu_init+0x4e>
+    1223:	31 db                	xor    ebx,ebx
+    1225:	0f 1f 00             	nop    DWORD PTR [rax]
+    1228:	4c 89 fa             	mov    rdx,r15
+    122b:	4c 89 f6             	mov    rsi,r14
+    122e:	44 89 ef             	mov    edi,r13d
+    1231:	41 ff 14 dc          	call   QWORD PTR [r12+rbx*8]
+    1235:	48 83 c3 01          	add    rbx,0x1
+    1239:	48 39 dd             	cmp    rbp,rbx
+    123c:	75 ea                	jne    1228 <__libc_csu_init+0x38>
+    123e:	48 83 c4 08          	add    rsp,0x8
+    1242:	5b                   	pop    rbx
+    1243:	5d                   	pop    rbp
+    1244:	41 5c                	pop    r12
+    1246:	41 5d                	pop    r13
+    1248:	41 5e                	pop    r14
+    124a:	41 5f                	pop    r15
+    124c:	c3                   	ret    
+    124d:	0f 1f 00             	nop    DWORD PTR [rax]
 
-0000000000001240 <__libc_csu_fini>:
-    1240:	c3                   	ret    
+0000000000001250 <__libc_csu_fini>:
+    1250:	c3                   	ret    
 
 Disassembly of section .fini:
 
-0000000000001244 <_fini>:
-    1244:	48 83 ec 08          	sub    rsp,0x8
-    1248:	48 83 c4 08          	add    rsp,0x8
-    124c:	c3                   	ret    
+0000000000001254 <_fini>:
+    1254:	48 83 ec 08          	sub    rsp,0x8
+    1258:	48 83 c4 08          	add    rsp,0x8
+    125c:	c3                   	ret    

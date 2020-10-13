@@ -1,25 +1,25 @@
 //#include <math.h>
-int pow (int x, int i)
+bool if_5_pow (int x)
 {
-	int ans=1;
-	if (i-- !=0)
+	while (x!=1)
 	{
-	ans*=x;
+		if(!(x%5))
+		{
+		x/=5;
+		}
+		else
+		return false;
 	}
-	return ans;
+	return true;
 }
 int main()
 {
-const unsigned int n=5;
+int arr[]={1,2,3,4,5};
 int sum=0;
-int curr_val=11;
-for(int i=0;i<n;++i)
+for(int* p=arr;p<arr+5;++p)
 {
-	sum+=curr_val;
-	curr_val*=-2;
+	if (if_5_pow(*p))
+		sum+=*p;
 }
-int sum1=111;
-sum1-=111;
-sum1=1*(pow(-2, n)-1)/((-2)-1);
-return sum-sum1;
+return sum;
 } 
