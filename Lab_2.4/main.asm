@@ -1,5 +1,5 @@
 section .data
-n dd 219
+n dd 195
 if_palindrom dd 1
 offsett dd 1
 global _start
@@ -15,19 +15,19 @@ section .text
   _start:
 ; %use masm
 
-mov    DWORD [n],0xdb
+;mov    DWORD [n],0xdb
 mov    DWORD[if_palindrom],0x1
-mov    [ebx],DWORD 0x0
+mov    ebx,DWORD 0x0
 for:
-    cmp    [ebx],DWORD 0x3
+    cmp    ebx,DWORD 0x3
     jg     exit
     mov    eax,0x7
-    sub    eax, [ebx]
+    sub    eax, ebx
     mov    edx, [n]
     mov    esi,edx
     mov    ecx,eax
     shr    esi,cl
-    mov    eax,  [ebx]
+    mov    eax,  ebx
     mov    edx, [n]
     mov    ecx,eax
     shr    edx,cl
@@ -38,7 +38,7 @@ for:
       je     if
       mov   DWORD [if_palindrom],0x0
 if:
-  add    DWORD [ebx],0x1
+  add    ebx,0x1
   jmp    for
 
 exit:
