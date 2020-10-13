@@ -16,3 +16,7 @@ assemble:
 	rm a.out
 assemble_2:
 	g++ -g -S main.cpp -o d_1.asm
+exec_cpp:
+	g++ -g main.cpp;
+	./a.out;
+	rm a.out;
