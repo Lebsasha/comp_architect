@@ -98,34 +98,34 @@ Disassembly of section .text:
 0000000000001125 <main>:
     1125:	55                   	push   rbp
     1126:	48 89 e5             	mov    rbp,rsp
-    1129:	c7 45 f4 c3 04 00 00 	mov    DWORD PTR [rbp-0xc],0x4c3
+    1129:	c7 45 f4 db 00 00 00 	mov    DWORD PTR [rbp-0xc],0xdb
     1130:	c6 45 ff 01          	mov    BYTE PTR [rbp-0x1],0x1
     1134:	c7 45 f8 00 00 00 00 	mov    DWORD PTR [rbp-0x8],0x0
     113b:	83 7d f8 03          	cmp    DWORD PTR [rbp-0x8],0x3
-    113f:	7f 2b                	jg     116c <main+0x47>
-    1141:	8b 45 f8             	mov    eax,DWORD PTR [rbp-0x8]
-    1144:	8b 55 f4             	mov    edx,DWORD PTR [rbp-0xc]
-    1147:	89 d6                	mov    esi,edx
-    1149:	89 c1                	mov    ecx,eax
-    114b:	d3 e6                	shl    esi,cl
-    114d:	8b 45 f8             	mov    eax,DWORD PTR [rbp-0x8]
-    1150:	8b 55 f4             	mov    edx,DWORD PTR [rbp-0xc]
-    1153:	89 c1                	mov    ecx,eax
-    1155:	d3 ea                	shr    edx,cl
-    1157:	89 d0                	mov    eax,edx
-    1159:	31 f0                	xor    eax,esi
-    115b:	83 e0 01             	and    eax,0x1
-    115e:	85 c0                	test   eax,eax
-    1160:	74 04                	je     1166 <main+0x41>
-    1162:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
-    1166:	83 45 f8 01          	add    DWORD PTR [rbp-0x8],0x1
-    116a:	eb cf                	jmp    113b <main+0x16>
-    116c:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
-    1170:	5d                   	pop    rbp
-    1171:	c3                   	ret    
-    1172:	66 2e 0f 1f 84 00 00 	nop    WORD PTR cs:[rax+rax*1+0x0]
-    1179:	00 00 00 
-    117c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+    113f:	7f 30                	jg     1171 <main+0x4c>
+    1141:	b8 07 00 00 00       	mov    eax,0x7
+    1146:	2b 45 f8             	sub    eax,DWORD PTR [rbp-0x8]
+    1149:	8b 55 f4             	mov    edx,DWORD PTR [rbp-0xc]
+    114c:	89 d6                	mov    esi,edx
+    114e:	89 c1                	mov    ecx,eax
+    1150:	d3 ee                	shr    esi,cl
+    1152:	8b 45 f8             	mov    eax,DWORD PTR [rbp-0x8]
+    1155:	8b 55 f4             	mov    edx,DWORD PTR [rbp-0xc]
+    1158:	89 c1                	mov    ecx,eax
+    115a:	d3 ea                	shr    edx,cl
+    115c:	89 d0                	mov    eax,edx
+    115e:	31 f0                	xor    eax,esi
+    1160:	83 e0 01             	and    eax,0x1
+    1163:	85 c0                	test   eax,eax
+    1165:	74 04                	je     116b <main+0x46>
+    1167:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+    116b:	83 45 f8 01          	add    DWORD PTR [rbp-0x8],0x1
+    116f:	eb ca                	jmp    113b <main+0x16>
+    1171:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+    1175:	5d                   	pop    rbp
+    1176:	c3                   	ret    
+    1177:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+    117e:	00 00 
 
 0000000000001180 <__libc_csu_init>:
     1180:	41 57                	push   r15
