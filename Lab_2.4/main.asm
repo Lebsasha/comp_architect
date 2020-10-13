@@ -37,5 +37,5 @@ if:
 
 exit:
 mov eax, 1;
-mov  ebx, BYTE[if_palindrom]
+movzx ebx, BYTE[if_palindrom]
 int 80h;
