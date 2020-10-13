@@ -9,8 +9,8 @@ global CMAIN
 section .bss
 
 section .text
-   main:
-    mov ebp, esp; for correct debugging
+  main:
+  mov ebp, esp; for correct debugging
   CMAIN:
   _start:
 
