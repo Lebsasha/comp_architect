@@ -1,6 +1,6 @@
 section .data
-arr dd 1, 2, 3, 4, 5;, 10 ,11, 125, 1125, 3125
-size dd 4*5
+arr dd 1, 2, 3, 4, 5, -4, -6, -1, 0, 8, 10 ,11, 125, 1125, 3125
+size dd 4*15
 result dd 0
 
 global _start
@@ -8,7 +8,7 @@ global main
 global CMAIN
 
 section .bss
-n_arr resd 5; resb 4*5
+n_arr resd 15; resb 4*5
 result_f resd 1
 p resd 1
 n_p resd 1
@@ -32,27 +32,46 @@ section .text
     
     mov    ebx,[p_end]
 
-    for:
+    for_neg:
     cmp    DWORD [p],ebx
-    jae    for_exit
-
-
+    jae    for_exit_neg
       mov    eax, DWORD [p]
       mov    eax, [eax]
-
-      ; mov    edi,eax
-      ; call   find_min
       cmp eax, 0
       jg gr_0
-      mov ecx, [n_p]
-      mov [ecx], eax
-      add    DWORD [n_p],0x4
+        mov ecx, [n_p]
+        mov [ecx], eax
+        add    DWORD [n_p],0x4
       gr_0:
       add    DWORD [p],0x4
-      jmp    for
-    for_exit:
+      jmp    for_neg
+    for_exit_neg:
 
-    add DWORD[result], 48
+    lea    eax, [arr]
+    mov    DWORD [p],eax
+
+    for_pos:
+    cmp    DWORD [p],ebx
+    jae    for_exit_pos
+      mov    eax, DWORD [p]
+      mov    eax, [eax]
+      cmp eax, 0
+      jle l_0
+        mov ecx, [n_p]
+        mov [ecx], eax
+        add    DWORD [n_p],0x4
+      l_0:
+      add    DWORD [p],0x4
+      jmp    for_pos
+    for_exit_pos:
+
+
+    mov    eax, 1
+    mov    ebx,0
+    int    80h
+
+
+    ; add DWORD[result], 48
     mov eax, 4
     mov ebx, 1
     mov ecx, result
@@ -61,7 +80,6 @@ section .text
     sub DWORD[result], 48
     mov    eax, 1
     mov    ebx,DWORD [result]
-    int    80h
 
 
 find_min_1:
