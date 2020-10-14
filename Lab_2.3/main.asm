@@ -50,12 +50,20 @@ section .text
     ; add    eax,edx *5
     ; add    eax,eax *10
     ; lea    ecx,[rax+rdx*1] *11
-    mov ebx, 1
-    mul ebx;
-    lea esi, [2+1]
-    idiv esi;
+    xor edx, edx
+    xor ecx, ecx
+    test eax, eax
+    jg gr_e
     sub ecx, eax
     mov eax, ecx
+    xor ecx, ecx
+    gr_e:
+    xor ebx, ebx
+    lea esi, [-2-1]
+    idiv esi ; ???
+    mov ebx, eax
+    mov eax, 1
+    int 80h
 ;     mov    edx,0x55555556
 ;     mov    eax,ecx
 ;     imul   edx
