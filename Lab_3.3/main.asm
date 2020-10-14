@@ -1,5 +1,5 @@
 section .data
-arr dd 1, 2, 3, 4, 5;, 10 ,11, 125, 1125, 3125
+arr dd 1, 2, 3,  4, 5, 6,  7, 8, 8
 size dd 4*5
 result dd 0
 
@@ -8,6 +8,7 @@ global main
 global CMAIN
 
 section .bss
+n_arr resd 9; resb 9*4
 p resd 1
 result_f resd 1
 
@@ -54,36 +55,38 @@ push   rbp
         mov    edx,eax
         mov    eax,DWORD PTR [k]
         add    eax,edx
-        cdqe   
-        mov    ecx,DWORD PTR [rbp+rax*4-0x70]
+        ; cdqe   
+        mov    ecx,DWORD PTR [n_arr+ eax*4] ; +=
         mov    eax,DWORD PTR [i]
         imul   eax,DWORD PTR [size]
         mov    edx,eax
         mov    eax,DWORD PTR [j]
         add    eax,edx
-        cdqe   
-        mov    edx,DWORD PTR [rbp+rax*4-0x40]
+        ;cdqe   
+        mov    edx,DWORD PTR [arr+eax*4] ; a[k] [j]
         mov    eax,DWORD PTR [k]
         imul   eax,DWORD PTR [size]
         mov    esi,eax
         mov    eax,DWORD PTR [j]
         add    eax,esi
-        cdqe   
-        mov    eax,DWORD PTR [rbp+rax*4-0x40]
-        imul   edx,eax
+        ;cdqe   
+        mov    eax,DWORD PTR [arr+eax*4] ;a[i][k]
+        imul   edx,eax ; a[k] [j]*a[i][k]
         mov    eax,DWORD PTR [i]
         imul   eax,DWORD PTR [size]
         mov    esi,eax
         mov    eax,DWORD PTR [k]
         add    eax,esi
-        add    edx,ecx
-        cdqe   
-        mov    DWORD PTR [rbp+rax*4-0x70],edx
+        add    edx,ecx;+=a[k] [j]*a[i][k]
+        ;cdqe   
+        mov    DWORD PTR [n_arr+eax*4-0x70],edx
         add    DWORD PTR [j],0x1
     jmp    for_j
-    exit_for_j: add    DWORD PTR [k],0x1
+    exit_for_j:
+        add    DWORD PTR [k],0x1
     jmp    for_k
-    exit_for_k:	add    DWORD PTR [i],0x1
+    exit_for_k:
+        add    DWORD PTR [i],0x1
     jmp    for_i
     exit_for_i:
 
