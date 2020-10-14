@@ -18,6 +18,88 @@ section .text
  ; _start:
   
 
+push   rbp
+    mov    rbp,rsp
+    mov    DWORD PTR [i0],0x1
+    mov    DWORD PTR [rbp-0x3c],0x2
+    mov    DWORD PTR [rbp-0x38],0x3
+    mov    DWORD PTR [rbp-0x34],0x4
+    mov    DWORD PTR [rbp-0x30],0x5
+    mov    DWORD PTR [rbp-0x2c],0x6
+    mov    DWORD PTR [rbp-0x28],0x7
+    mov    DWORD PTR [rbp-0x24],0x8
+    mov    DWORD PTR [rbp-0x20],0x8
+
+    mov    QWORD PTR [rbp-0x70],0x0
+    mov    QWORD PTR [rbp-0x68],0x0
+    mov    QWORD PTR [rbp-0x60],0x0
+    mov    QWORD PTR [rbp-0x58],0x0
+    mov    DWORD PTR [rbp-0x50],0x0
+    mov    DWORD PTR [size],0x3 -- size
+    mov    DWORD PTR [i],0x0
+
+    for_i:	mov    eax,DWORD PTR [i]
+    cmp    eax,DWORD PTR [size]
+    jge    exit_for_i
+    mov    DWORD PTR [k],0x0
+    for_k: mov    eax,DWORD PTR [k]
+    cmp    eax,DWORD PTR [size]
+    jge    exit_for_k
+    mov    DWORD PTR [j],0x0
+    for_j: mov    eax,DWORD PTR [j]
+    cmp    eax,DWORD PTR [size]
+    jge    exit_for_j
+        mov    eax,DWORD PTR [i]
+        imul   eax,DWORD PTR [size]
+        mov    edx,eax
+        mov    eax,DWORD PTR [k]
+        add    eax,edx
+        cdqe   
+        mov    ecx,DWORD PTR [rbp+rax*4-0x70]
+        mov    eax,DWORD PTR [i]
+        imul   eax,DWORD PTR [size]
+        mov    edx,eax
+        mov    eax,DWORD PTR [j]
+        add    eax,edx
+        cdqe   
+        mov    edx,DWORD PTR [rbp+rax*4-0x40]
+        mov    eax,DWORD PTR [k]
+        imul   eax,DWORD PTR [size]
+        mov    esi,eax
+        mov    eax,DWORD PTR [j]
+        add    eax,esi
+        cdqe   
+        mov    eax,DWORD PTR [rbp+rax*4-0x40]
+        imul   edx,eax
+        mov    eax,DWORD PTR [i]
+        imul   eax,DWORD PTR [size]
+        mov    esi,eax
+        mov    eax,DWORD PTR [k]
+        add    eax,esi
+        add    edx,ecx
+        cdqe   
+        mov    DWORD PTR [rbp+rax*4-0x70],edx
+        add    DWORD PTR [j],0x1
+    jmp    for_j
+    exit_for_j: add    DWORD PTR [k],0x1
+    jmp    for_k
+    exit_for_k:	add    DWORD PTR [i],0x1
+    jmp    for_i
+    exit_for_i:
+
+    mov    eax,0x0
+    mov    DWORD PTR [rbp-0x14],0xffff
+    pop    rbp
+    ret
+
+    exit:
+    mov    eax, 1
+    ; mov    ebx, 0
+    int    80h
+    
+
+
+
     lea    eax,[arr]
     mov    DWORD [p],eax
     lea    ebx,[arr]
