@@ -44,8 +44,8 @@ Disassembly of section .text:
     106b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
 
 0000000000001070 <deregister_tm_clones>:
-    1070:	48 8d 3d b9 2f 00 00 	lea    rdi,[rip+0x2fb9]        # 4030 <__TMC_END__>
-    1077:	48 8d 05 b2 2f 00 00 	lea    rax,[rip+0x2fb2]        # 4030 <__TMC_END__>
+    1070:	48 8d 3d b1 2f 00 00 	lea    rdi,[rip+0x2fb1]        # 4028 <__TMC_END__>
+    1077:	48 8d 05 aa 2f 00 00 	lea    rax,[rip+0x2faa]        # 4028 <__TMC_END__>
     107e:	48 39 f8             	cmp    rax,rdi
     1081:	74 15                	je     1098 <deregister_tm_clones+0x28>
     1083:	48 8b 05 56 2f 00 00 	mov    rax,QWORD PTR [rip+0x2f56]        # 3fe0 <_ITM_deregisterTMCloneTable>
@@ -57,8 +57,8 @@ Disassembly of section .text:
     1099:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
 
 00000000000010a0 <register_tm_clones>:
-    10a0:	48 8d 3d 89 2f 00 00 	lea    rdi,[rip+0x2f89]        # 4030 <__TMC_END__>
-    10a7:	48 8d 35 82 2f 00 00 	lea    rsi,[rip+0x2f82]        # 4030 <__TMC_END__>
+    10a0:	48 8d 3d 81 2f 00 00 	lea    rdi,[rip+0x2f81]        # 4028 <__TMC_END__>
+    10a7:	48 8d 35 7a 2f 00 00 	lea    rsi,[rip+0x2f7a]        # 4028 <__TMC_END__>
     10ae:	48 29 fe             	sub    rsi,rdi
     10b1:	48 c1 fe 03          	sar    rsi,0x3
     10b5:	48 89 f0             	mov    rax,rsi
@@ -75,7 +75,7 @@ Disassembly of section .text:
     10d9:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
 
 00000000000010e0 <__do_global_dtors_aux>:
-    10e0:	80 3d 45 2f 00 00 00 	cmp    BYTE PTR [rip+0x2f45],0x0        # 402c <_edata>
+    10e0:	80 3d 41 2f 00 00 00 	cmp    BYTE PTR [rip+0x2f41],0x0        # 4028 <__TMC_END__>
     10e7:	75 2f                	jne    1118 <__do_global_dtors_aux+0x38>
     10e9:	55                   	push   rbp
     10ea:	48 83 3d e6 2e 00 00 	cmp    QWORD PTR [rip+0x2ee6],0x0        # 3fd8 <__cxa_finalize@GLIBC_2.2.5>
@@ -85,7 +85,7 @@ Disassembly of section .text:
     10f7:	48 8b 3d 22 2f 00 00 	mov    rdi,QWORD PTR [rip+0x2f22]        # 4020 <__dso_handle>
     10fe:	e8 2d ff ff ff       	call   1030 <__cxa_finalize@plt>
     1103:	e8 68 ff ff ff       	call   1070 <deregister_tm_clones>
-    1108:	c6 05 1d 2f 00 00 01 	mov    BYTE PTR [rip+0x2f1d],0x1        # 402c <_edata>
+    1108:	c6 05 19 2f 00 00 01 	mov    BYTE PTR [rip+0x2f19],0x1        # 4028 <__TMC_END__>
     110f:	5d                   	pop    rbp
     1110:	c3                   	ret    
     1111:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
@@ -165,11 +165,11 @@ Disassembly of section .text:
     1226:	eb 88                	jmp    11b0 <main+0x8b>
     1228:	83 45 fc 01          	add    DWORD PTR [rbp-0x4],0x1
     122c:	e9 6c ff ff ff       	jmp    119d <main+0x78>
-    1231:	b8 00 00 00 00       	mov    eax,0x0
-    1236:	5d                   	pop    rbp
-    1237:	c3                   	ret    
-    1238:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
-    123f:	00 
+    1231:	c7 45 ec ff ff 00 00 	mov    DWORD PTR [rbp-0x14],0xffff
+    1238:	b8 00 00 00 00       	mov    eax,0x0
+    123d:	5d                   	pop    rbp
+    123e:	c3                   	ret    
+    123f:	90                   	nop
 
 0000000000001240 <__libc_csu_init>:
     1240:	41 57                	push   r15
