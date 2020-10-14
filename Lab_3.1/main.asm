@@ -1,5 +1,5 @@
 section .data
-arr dd 1, 2, 3, 4, 5;, 10 ,11, 125, 1125
+arr dd 1, 2, 3, 4, 5;, 10 ,11, 125, 1125, 3125
 size dd 4*5
 result dd 0
 
@@ -15,17 +15,16 @@ section .text
   main:
   mov ebp, esp; for correct debugging
   CMAIN:
-  _start:
+ ; _start:
   
 
-    mov    DWORD [result],0x0
     lea    eax,[arr]
     mov    DWORD [p],eax
+    lea    ebx,[arr]
+    add    ebx, [size]
 
     for:
-    lea    eax,[arr]
-    add    eax, [size]
-    cmp    DWORD [p],eax ;cmp
+    cmp    DWORD [p],ebx
     jae    for_exit
       mov    eax, DWORD [p]
       mov    eax, [eax]
@@ -46,6 +45,7 @@ section .text
     mov ecx, result
     mov edx, 4
     int    80h
+    sub DWORD[result], 48
     mov    eax, 1
     mov    ebx,DWORD [result]
     int    80h
