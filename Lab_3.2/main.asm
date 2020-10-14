@@ -8,9 +8,12 @@ global main
 global CMAIN
 
 section .bss
-p resd 1
+n_arr resd 5; resb 4*5
 result_f resd 1
-
+p resd 1
+n_p resd 1
+p_end resd 1
+n_p_end resd 1
 section .text
   main:
   mov ebp, esp; for correct debugging
@@ -18,27 +21,37 @@ section .text
  ; _start:
   
 
-    lea    eax,[arr]
+    lea    eax, [arr]
     mov    DWORD [p],eax
-    lea    ebx,[arr]
-    add    ebx, [size]
+    add eax, [size]
+    mov DWORD[p_end], eax
+    lea    eax,[n_arr]
+    mov    DWORD [n_p],eax
+    add eax, [size]
+    mov DWORD[n_p_end], eax
+    
+    mov    ebx,[p_end]
 
     for:
     cmp    DWORD [p],ebx
     jae    for_exit
+
+
       mov    eax, DWORD [p]
       mov    eax, [eax]
-      mov    edi,eax
-      call   if_pow_5
-      test   al,al
-      je     if_not_mod_5
-        mov    eax,DWORD [p]
-        mov    eax, [eax]
-        add    DWORD [result],eax
-      if_not_mod_5:
+
+      ; mov    edi,eax
+      ; call   find_min
+      cmp eax, 0
+      jg gr_0
+      mov ecx, [n_p]
+      mov [ecx], eax
+      add    DWORD [n_p],0x4
+      gr_0:
       add    DWORD [p],0x4
       jmp    for
     for_exit:
+
     add DWORD[result], 48
     mov eax, 4
     mov ebx, 1
@@ -51,8 +64,23 @@ section .text
     int    80h
 
 
-if_pow_5:
+find_min_1:
     mov    DWORD [result_f],edi
+    for_f:
+    cmp    ecx,ebx
+    jae    for_f_exit
+      cmp eax, [ecx]
+      jle min
+      cmp eax, 0
+      jle min
+      MOV eax, [ecx]
+      min:
+      add    ecx,0x4
+      jmp    for_f
+
+    for_f_exit:
+    ret
+
     while:
     cmp    DWORD [result_f],0x1
     je     exit_while
@@ -64,6 +92,9 @@ if_pow_5:
         jne    mod_5_not_0
             mov    DWORD [result_f],eax
         jmp    while
+
+
+
     mod_5_not_0:
     mov    eax,0x0
     jmp    return
