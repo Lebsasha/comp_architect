@@ -31,10 +31,5 @@ for (int j=0; j < n; ++j)
 }
 View(A, 3, 3);
 View(C, 3, 3);
-//for(int* p=A;p<A+5;++p)
-//{
-//	if (if_5_pow(*p))
-//		sum+=*p;
-//}
 return 0;
 }
