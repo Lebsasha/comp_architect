@@ -1,5 +1,5 @@
 section .data
-n dd 219 ;195
+n dd 5
 sum dd 0;
 x dd 0
 i dd 0
@@ -14,26 +14,22 @@ section .text
   CMAIN:
   _start:
 
-    mov    DWORD [n],0x5
-    mov    DWORD [sum],0x6f
-    sub    DWORD [sum], 0x6f
-    mov    esi,0x5
-    mov    edi,0xfffffffe; -2
+    mov    esi, DWORD [n]
+    mov    edi, -2
     call   pow
     lea    eax,[eax-0x1]
     cmp eax, 0
     jge gr
-    mov edx, 0xffffffff
-    jmp end_if
-    gr:
-    mov edx, 0
+        mov edx, 0xffffffff
+        jmp end_if
+        gr:
+        mov edx, 0
     end_if:
-    xor ecx, ecx
-    xor ebx, ebx
     lea esi, [-2-1]
     idiv esi
     mov ebx, eax
     mov eax, 1
+    nop
     int 80h
 
 
