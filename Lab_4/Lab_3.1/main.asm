@@ -46,7 +46,7 @@ section .text
 
 
 if_5_pow:
-    push ebp
+    push rbp
     mov    DWORD [result_f],edi
     while:
     cmp    DWORD [result_f],0x1
@@ -66,5 +66,5 @@ if_5_pow:
     mov    eax,0x1
     mov edx, 0
     return:
-    pop ebp
+    pop rbp
     ret    
