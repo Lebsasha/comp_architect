@@ -23,8 +23,7 @@ for(int* p=arr;p<arr+size;++p)
 {
 	if (if_5_pow(*p))
 		sum+=*p;
-std::cout<<sum<<std::endl;
 }
 std::cout<<sum<<std::endl;
-return sum;
+return 0;
 }
