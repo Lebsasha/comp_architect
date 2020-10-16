@@ -5,7 +5,7 @@ result dd 0
 global _start
 global main
 global CMAIN
-
+global multiply_matrix
 section .bss
 n_arr resd 9; resb 9*4
 
@@ -17,12 +17,14 @@ p resd 1
 result_f resd 1
 
 section .text
-  main:
+  ;main:
   mov ebp, esp; for correct debugging
-  CMAIN:
+  ;CMAIN:
 ;  _start:
   
 
+multiply_matrix:
+    push rbp
 
     mov    DWORD [size],0x3
     mov    DWORD [i],0x0
@@ -78,7 +80,5 @@ section .text
     jmp    for_i
     exit_for_i:
 
-    exit:
-    mov    eax, 1
-    ; mov    ebx, 0
-    int    80h
+    pop rbp
+    ret
