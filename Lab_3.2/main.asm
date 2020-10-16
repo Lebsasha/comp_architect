@@ -7,7 +7,7 @@ global main
 global CMAIN
 
 section .bss
-n_arr resd 15; resb 4*5
+n_arr resd 15
 p resd 1
 n_p resd 1
 p_end resd 1
