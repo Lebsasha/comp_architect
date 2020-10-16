@@ -1,14 +1,15 @@
 section .data
-arr dd 1, 2, 3,  4, 5, 6,  7, 8, 8
+;arr dd 1, 2, 3,  4, 5, 6,  7, 8, 8
 size dd 3
 result dd 0
 global _start
 global main
 global CMAIN
 global multiply_matrix
-section .bss
-n_arr resd 9; resb 9*4
 
+section .bss
+n_arr resd 2 ;9 resb 9*4
+arr resd 2
 i resd 1
 j resd 1
 k resd 1
@@ -25,8 +26,10 @@ section .text
 
 multiply_matrix:
     push rbp
-
-    mov    DWORD [size],0x3
+    mov rbp, rsp; for correct debugging
+    mov rax, [rbp+16]
+    mov QWORD[arr], rax
+    ;mov    DWORD [size],0x3
     mov    DWORD [i],0x0
 
     for_i:	mov    eax,DWORD [i]
