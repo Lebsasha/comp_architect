@@ -130,23 +130,23 @@ Disassembly of section .text:
     1186:	48 89 e5             	mov    rbp,rsp
     1189:	48 89 7d e8          	mov    QWORD PTR [rbp-0x18],rdi
     118d:	48 89 75 e0          	mov    QWORD PTR [rbp-0x20],rsi
-    1191:	89 55 dc             	mov    DWORD PTR [rbp-0x24],edx
-    1194:	c7 45 fc 00 00 00 00 	mov    DWORD PTR [rbp-0x4],0x0
-    119b:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
-    119e:	3b 45 dc             	cmp    eax,DWORD PTR [rbp-0x24]
+    1191:	89 55 dc             	mov    DWORD PTR [n],edx
+    1194:	c7 45 fc 00 00 00 00 	mov    DWORD PTR [i],0x0
+    119b:	8b 45 fc             	mov    eax,DWORD PTR [i]
+    119e:	3b 45 dc             	cmp    eax,DWORD PTR [n]
     11a1:	0f 8d ca 00 00 00    	jge    1271 <_Z15multiple_matrixPiS_i+0xec>
-    11a7:	c7 45 f8 00 00 00 00 	mov    DWORD PTR [rbp-0x8],0x0
-    11ae:	8b 45 f8             	mov    eax,DWORD PTR [rbp-0x8]
-    11b1:	3b 45 dc             	cmp    eax,DWORD PTR [rbp-0x24]
+    11a7:	c7 45 f8 00 00 00 00 	mov    DWORD PTR [k],0x0
+    11ae:	8b 45 f8             	mov    eax,DWORD PTR [k]
+    11b1:	3b 45 dc             	cmp    eax,DWORD PTR [n]
     11b4:	0f 8d ae 00 00 00    	jge    1268 <_Z15multiple_matrixPiS_i+0xe3>
-    11ba:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [rbp-0xc],0x0
-    11c1:	8b 45 f4             	mov    eax,DWORD PTR [rbp-0xc]
-    11c4:	3b 45 dc             	cmp    eax,DWORD PTR [rbp-0x24]
+    11ba:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [j],0x0
+    11c1:	8b 45 f4             	mov    eax,DWORD PTR [j]
+    11c4:	3b 45 dc             	cmp    eax,DWORD PTR [n]
     11c7:	0f 8d 92 00 00 00    	jge    125f <_Z15multiple_matrixPiS_i+0xda>
-    11cd:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
-    11d0:	0f af 45 dc          	imul   eax,DWORD PTR [rbp-0x24]
+    11cd:	8b 45 fc             	mov    eax,DWORD PTR [i]
+    11d0:	0f af 45 dc          	imul   eax,DWORD PTR [n]
     11d4:	89 c2                	mov    edx,eax
-    11d6:	8b 45 f8             	mov    eax,DWORD PTR [rbp-0x8]
+    11d6:	8b 45 f8             	mov    eax,DWORD PTR [k]
     11d9:	01 d0                	add    eax,edx
     11db:	48 98                	cdqe   
     11dd:	48 8d 14 85 00 00 00 	lea    rdx,[rax*4+0x0]
@@ -154,10 +154,10 @@ Disassembly of section .text:
     11e5:	48 8b 45 e0          	mov    rax,QWORD PTR [rbp-0x20]
     11e9:	48 01 d0             	add    rax,rdx
     11ec:	8b 08                	mov    ecx,DWORD PTR [rax]
-    11ee:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
-    11f1:	0f af 45 dc          	imul   eax,DWORD PTR [rbp-0x24]
+    11ee:	8b 45 fc             	mov    eax,DWORD PTR [i]
+    11f1:	0f af 45 dc          	imul   eax,DWORD PTR [n]
     11f5:	89 c2                	mov    edx,eax
-    11f7:	8b 45 f4             	mov    eax,DWORD PTR [rbp-0xc]
+    11f7:	8b 45 f4             	mov    eax,DWORD PTR [j]
     11fa:	01 d0                	add    eax,edx
     11fc:	48 98                	cdqe   
     11fe:	48 8d 14 85 00 00 00 	lea    rdx,[rax*4+0x0]
@@ -165,10 +165,10 @@ Disassembly of section .text:
     1206:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
     120a:	48 01 d0             	add    rax,rdx
     120d:	8b 10                	mov    edx,DWORD PTR [rax]
-    120f:	8b 45 f8             	mov    eax,DWORD PTR [rbp-0x8]
-    1212:	0f af 45 dc          	imul   eax,DWORD PTR [rbp-0x24]
+    120f:	8b 45 f8             	mov    eax,DWORD PTR [k]
+    1212:	0f af 45 dc          	imul   eax,DWORD PTR [n]
     1216:	89 c6                	mov    esi,eax
-    1218:	8b 45 f4             	mov    eax,DWORD PTR [rbp-0xc]
+    1218:	8b 45 f4             	mov    eax,DWORD PTR [j]
     121b:	01 f0                	add    eax,esi
     121d:	48 98                	cdqe   
     121f:	48 8d 34 85 00 00 00 	lea    rsi,[rax*4+0x0]
@@ -177,10 +177,10 @@ Disassembly of section .text:
     122b:	48 01 f0             	add    rax,rsi
     122e:	8b 00                	mov    eax,DWORD PTR [rax]
     1230:	0f af d0             	imul   edx,eax
-    1233:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
-    1236:	0f af 45 dc          	imul   eax,DWORD PTR [rbp-0x24]
+    1233:	8b 45 fc             	mov    eax,DWORD PTR [i]
+    1236:	0f af 45 dc          	imul   eax,DWORD PTR [n]
     123a:	89 c6                	mov    esi,eax
-    123c:	8b 45 f8             	mov    eax,DWORD PTR [rbp-0x8]
+    123c:	8b 45 f8             	mov    eax,DWORD PTR [k]
     123f:	01 f0                	add    eax,esi
     1241:	48 98                	cdqe   
     1243:	48 8d 34 85 00 00 00 	lea    rsi,[rax*4+0x0]
@@ -189,11 +189,11 @@ Disassembly of section .text:
     124f:	48 01 f0             	add    rax,rsi
     1252:	01 ca                	add    edx,ecx
     1254:	89 10                	mov    DWORD PTR [rax],edx
-    1256:	83 45 f4 01          	add    DWORD PTR [rbp-0xc],0x1
+    1256:	83 45 f4 01          	add    DWORD PTR [j],0x1
     125a:	e9 62 ff ff ff       	jmp    11c1 <_Z15multiple_matrixPiS_i+0x3c>
-    125f:	83 45 f8 01          	add    DWORD PTR [rbp-0x8],0x1
+    125f:	83 45 f8 01          	add    DWORD PTR [k],0x1
     1263:	e9 46 ff ff ff       	jmp    11ae <_Z15multiple_matrixPiS_i+0x29>
-    1268:	83 45 fc 01          	add    DWORD PTR [rbp-0x4],0x1
+    1268:	83 45 fc 01          	add    DWORD PTR [i],0x1
     126c:	e9 2a ff ff ff       	jmp    119b <_Z15multiple_matrixPiS_i+0x16>
     1271:	90                   	nop
     1272:	5d                   	pop    rbp
@@ -206,7 +206,7 @@ Disassembly of section .text:
     127c:	c7 45 d0 01 00 00 00 	mov    DWORD PTR [rbp-0x30],0x1
     1283:	c7 45 d4 02 00 00 00 	mov    DWORD PTR [rbp-0x2c],0x2
     128a:	c7 45 d8 03 00 00 00 	mov    DWORD PTR [rbp-0x28],0x3
-    1291:	c7 45 dc 04 00 00 00 	mov    DWORD PTR [rbp-0x24],0x4
+    1291:	c7 45 dc 04 00 00 00 	mov    DWORD PTR [n],0x4
     1298:	c7 45 e0 05 00 00 00 	mov    DWORD PTR [rbp-0x20],0x5
     129f:	c7 45 e4 06 00 00 00 	mov    DWORD PTR [rbp-0x1c],0x6
     12a6:	c7 45 e8 07 00 00 00 	mov    DWORD PTR [rbp-0x18],0x7
@@ -218,11 +218,11 @@ Disassembly of section .text:
     12ca:	00 
     12cb:	48 c7 45 b0 00 00 00 	mov    QWORD PTR [rbp-0x50],0x0
     12d2:	00 
-    12d3:	48 c7 45 b8 00 00 00 	mov    QWORD PTR [rbp-0x48],0x0
+    12d3:	48 c7 45 b8 00 00 00 	mov    QWORD PTR [i8],0x0
     12da:	00 
-    12db:	c7 45 c0 00 00 00 00 	mov    DWORD PTR [rbp-0x40],0x0
-    12e2:	c7 45 fc 03 00 00 00 	mov    DWORD PTR [rbp-0x4],0x3
-    12e9:	8b 55 fc             	mov    edx,DWORD PTR [rbp-0x4]
+    12db:	c7 45 c0 00 00 00 00 	mov    DWORD PTR [i0],0x0
+    12e2:	c7 45 fc 03 00 00 00 	mov    DWORD PTR [i],0x3
+    12e9:	8b 55 fc             	mov    edx,DWORD PTR [i]
     12ec:	48 8d 4d a0          	lea    rcx,[rbp-0x60]
     12f0:	48 8d 45 d0          	lea    rax,[rbp-0x30]
     12f4:	48 89 ce             	mov    rsi,rcx
@@ -246,11 +246,11 @@ Disassembly of section .text:
     1332:	55                   	push   rbp
     1333:	48 89 e5             	mov    rbp,rsp
     1336:	48 83 ec 10          	sub    rsp,0x10
-    133a:	89 7d fc             	mov    DWORD PTR [rbp-0x4],edi
-    133d:	89 75 f8             	mov    DWORD PTR [rbp-0x8],esi
-    1340:	83 7d fc 01          	cmp    DWORD PTR [rbp-0x4],0x1
+    133a:	89 7d fc             	mov    DWORD PTR [i],edi
+    133d:	89 75 f8             	mov    DWORD PTR [k],esi
+    1340:	83 7d fc 01          	cmp    DWORD PTR [i],0x1
     1344:	75 32                	jne    1378 <_Z41__static_initialization_and_destruction_0ii+0x46>
-    1346:	81 7d f8 ff ff 00 00 	cmp    DWORD PTR [rbp-0x8],0xffff
+    1346:	81 7d f8 ff ff 00 00 	cmp    DWORD PTR [k],0xffff
     134d:	75 29                	jne    1378 <_Z41__static_initialization_and_destruction_0ii+0x46>
     134f:	48 8d 3d 1b 2e 00 00 	lea    rdi,[rip+0x2e1b]        # 4171 <_ZStL8__ioinit>
     1356:	e8 15 fd ff ff       	call   1070 <_ZNSt8ios_base4InitC1Ev@plt>
@@ -275,8 +275,8 @@ Disassembly of section .text:
 0000000000001390 <_ZSt4setwi>:
     1390:	55                   	push   rbp
     1391:	48 89 e5             	mov    rbp,rsp
-    1394:	89 7d fc             	mov    DWORD PTR [rbp-0x4],edi
-    1397:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+    1394:	89 7d fc             	mov    DWORD PTR [i],edi
+    1397:	8b 45 fc             	mov    eax,DWORD PTR [i]
     139a:	5d                   	pop    rbp
     139b:	c3                   	ret    
 
@@ -294,11 +294,11 @@ Disassembly of section .text:
     13bf:	0f 95 c0             	setne  al
     13c2:	84 c0                	test   al,al
     13c4:	0f 84 aa 00 00 00    	je     1474 <_Z4ViewIiEvPT_mm+0xd8>
-    13ca:	48 c7 45 f8 00 00 00 	mov    QWORD PTR [rbp-0x8],0x0
+    13ca:	48 c7 45 f8 00 00 00 	mov    QWORD PTR [k],0x0
     13d1:	00 
     13d2:	48 8b 45 d8          	mov    rax,QWORD PTR [rbp-0x28]
     13d6:	48 83 e8 01          	sub    rax,0x1
-    13da:	48 39 45 f8          	cmp    QWORD PTR [rbp-0x8],rax
+    13da:	48 39 45 f8          	cmp    QWORD PTR [k],rax
     13de:	73 46                	jae    1426 <_Z4ViewIiEvPT_mm+0x8a>
     13e0:	bf 03 00 00 00       	mov    edi,0x3
     13e5:	e8 a6 ff ff ff       	call   1390 <_ZSt4setwi>
@@ -315,7 +315,7 @@ Disassembly of section .text:
     1412:	48 89 c7             	mov    rdi,rax
     1415:	e8 26 fc ff ff       	call   1040 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
     141a:	48 83 45 e8 04       	add    QWORD PTR [rbp-0x18],0x4
-    141f:	48 83 45 f8 01       	add    QWORD PTR [rbp-0x8],0x1
+    141f:	48 83 45 f8 01       	add    QWORD PTR [k],0x1
     1424:	eb ac                	jmp    13d2 <_Z4ViewIiEvPT_mm+0x36>
     1426:	bf 03 00 00 00       	mov    edi,0x3
     142b:	e8 60 ff ff ff       	call   1390 <_ZSt4setwi>
