@@ -1,6 +1,6 @@
 section .data
-arr dd 1, 2, 3, 4, 5;, 10 ,11, 125, 1125, 3125
-size dd 4*5
+arr dd 1, 2, 3, 4, 5, 10 ,11, 125, 1125, 3125
+size dd 4*10
 result dd 0
 
 global _start
@@ -39,13 +39,6 @@ section .text
       add    DWORD [p],0x4
       jmp    for
     for_exit:
-    add DWORD[result], 48
-    mov eax, 4
-    mov ebx, 1
-    mov ecx, result
-    mov edx, 4
-    int    80h
-    sub DWORD[result], 48
     mov    eax, 1
     mov    ebx,DWORD [result]
     int    80h
