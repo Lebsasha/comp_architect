@@ -1,4 +1,6 @@
 section .data
+znam dd -2
+first dd 1
 n dd 5
 sum dd 0;
 x dd 0
@@ -15,7 +17,7 @@ section .text
   _start:
 
     mov    esi, DWORD [n]
-    mov    edi, -2
+    mov    edi, DWORD [znam]
     call   pow
     lea    eax,[eax-0x1]
     cmp eax, 0
@@ -25,8 +27,10 @@ section .text
         gr:
         mov edx, 0
     end_if:
-    lea esi, [-2-1]
+    mov    esi, DWORD [znam]
+    lea esi, [esi-1]
     idiv esi
+    imul eax, DWORD [first]
     mov ebx, eax
     mov eax, 1
     nop
