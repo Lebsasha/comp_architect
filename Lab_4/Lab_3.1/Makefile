@@ -1,3 +1,9 @@
+build:
+	@nasm -f elf main.asm -o assemblee.o;
+	@g++ -g -O2 -fomit-frame-pointer -W -Wall main.cpp -o cpp.o;
+	@g++ -o test assemblee.o main.o
+	#@ld assemblee.o cpp.o  -o main
+	@./main
 run_only:
 	@nasm -f elf main.asm;
 	@ld -m elf_i386 -s -o main main.o;
