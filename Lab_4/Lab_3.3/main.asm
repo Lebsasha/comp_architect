@@ -30,7 +30,10 @@ multiply_matrix:
     ;mov rax, [rbp+16]
     ;mov QWORD[arr], rax
     ;mov    DWORD [size],0x3
-    mov DWORD[arr],s
+    mov QWORD[arr], rdi
+    mov QWORD[n_arr], rsi
+    mov DWORD[size], edx
+
     mov    DWORD [i],0x0
 
     for_i:	mov    eax,DWORD [i]
@@ -50,21 +53,34 @@ multiply_matrix:
         mov    eax,DWORD [k]
         add    eax,edx
         ; cdqe   
-        mov    ecx,DWORD [n_arr+ eax*4] ; +=
+        lea    rax, [rax*4]
+        mov    rcx,QWORD [n_arr]
+        add    rcx, rax
+        mov ecx, DWORD[rcx] ; +=
+        ; mov    ecx,DWORD [n_arr+ eax*4] ; +=
         mov    eax,DWORD [i]
         imul   eax,DWORD [size]
         mov    edx,eax
         mov    eax,DWORD [j]
         add    eax,edx
         ;cdqe   
-        mov    edx,DWORD [arr+eax*4] ; a[k] [j]
+        ;cwde                                           ; TODO
+        lea    rax, [rax*4]
+        mov    rdx,QWORD [arr]
+        add    rdx, rax
+        mov edx, DWORD[rdx] 
+        ; mov    edx,DWORD [arr+eax*4] ; a[k] [j]
         mov    eax,DWORD [k]
         imul   eax,DWORD [size]
         mov    esi,eax
         mov    eax,DWORD [j]
         add    eax,esi
         ;cdqe   
-        mov    eax,DWORD [arr+eax*4] ;a[i][k]
+        lea    rax, [rax*4]
+        mov    rsi,QWORD [arr]
+        add    rsi, rax
+        mov eax, DWORD[rsi]  ;a[i][k]
+        ; mov    eax,DWORD [arr+eax*4] ;a[i][k]
         imul   edx,eax ; a[k] [j]*a[i][k]
         mov    eax,DWORD [i]
         imul   eax,DWORD [size]
@@ -73,7 +89,10 @@ multiply_matrix:
         add    eax,esi
         add    edx,ecx;+=a[k] [j]*a[i][k]
         ;cdqe   
-        mov    DWORD [n_arr+eax*4],edx
+        lea    rax, [rax*4]
+        mov    rsi,QWORD [n_arr]
+        add    rsi, rax
+        mov    DWORD [rsi],edx
         add    DWORD [j],0x1
     jmp    for_j
     exit_for_j:
