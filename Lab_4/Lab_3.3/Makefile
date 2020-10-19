@@ -1,7 +1,7 @@
 build:
-	@nasm -f elf64 main.asm -o assemblee.o;
-	@g++ -no-pie main.cpp assemblee.o -o main
-	@./main
+	nasm -f elf64 main.asm -o assemblee.o;
+	g++ -no-pie main.cpp assemblee.o -o main
+	./main
 	@rm ./main assemblee.o
 assemble:
 	@g++ -g main.cpp
