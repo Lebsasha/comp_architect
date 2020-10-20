@@ -1,7 +1,7 @@
 section .data
-znam dd -3
+znam dd -2
 first dd 1
-n dd 19
+n dd 30
 sum dd 0;
 x dd 0
 i dd 0
