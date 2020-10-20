@@ -9,20 +9,16 @@ i resd 1
 j resd 1
 k resd 1
 
-p resd 1
-result_f resd 1
-
 section .text
 
 multiply_matrix:
-    push rbp
-    mov rbp, rsp; for correct debugging
     mov QWORD[arr], rdi
     mov QWORD[n_arr], rsi
     mov DWORD[size], edx
 
+    ;mov eax, 2 ; or 1
+    ;cdqe ;for safety from taking incorrect address, but it hadn't been there from g++
     mov    DWORD [i],0x0
-
     for_i:	mov    eax,DWORD [i]
     cmp    eax,DWORD [size]
     jge    exit_for_i
@@ -41,17 +37,16 @@ multiply_matrix:
         add    eax,edx
         mov    rcx,QWORD [n_arr]
         lea    rcx, [rcx+rax*4]
-        mov ecx, DWORD[rcx] ; +=
+        mov    ecx, DWORD[rcx] ; +=
         mov    eax,DWORD [i]
         imul   eax,DWORD [size]
         mov    edx,eax
         mov    eax,DWORD [j]
         add    eax,edx
-        ;cdqe   
-        ;cwde -- maybe same as cdqe in 32 bits mode
+        cdqe   ;because rax not included in mov commands and not used except addressing.
         mov    rdx,QWORD [arr]
         lea    rdx, [rdx+rax*4]
-        mov edx, DWORD[rdx]; a[i][j]
+        mov    edx, DWORD[rdx]; a[i][j]
         mov    eax,DWORD [k]
         imul   eax,DWORD [size]
         mov    esi,eax
@@ -60,7 +55,7 @@ multiply_matrix:
         ;cdqe
         mov    rsi,QWORD [arr]
         lea    rsi, [rsi+rax*4]
-        mov eax, DWORD[rsi]  ;a[k][j]
+        mov    eax, DWORD[rsi]  ;a[k][j]
         imul   edx,eax ; a[i][j]*a[k][j]
         mov    eax,DWORD [i]
         imul   eax,DWORD [size]
@@ -68,7 +63,7 @@ multiply_matrix:
         mov    eax,DWORD [k]
         add    eax,esi
         add    edx,ecx;+=a[i][j]*a[k][j]
-        ;cdqe   ; for extension eax -> rax with zeroing (in fact copying leading sign)
+        ;cdqe   ; for extension eax -> rax with zeroing (in fact copying leading sign bit)
         mov    rsi,QWORD [n_arr]
         lea    rsi, [rsi+rax*4]
         mov    DWORD [rsi],edx; a[i][k]= edx
@@ -82,5 +77,4 @@ multiply_matrix:
     jmp    for_i
     exit_for_i:
 
-    pop rbp
     ret
