@@ -20,13 +20,14 @@ section .text
     mov    edi, DWORD [znam]
     call   pow
     lea    eax,[eax-0x1]
-    cmp eax, 0
-    jge gr
-        mov edx, 0xffffffff
-        jmp end_if
-        gr:
-        mov edx, 0
-    end_if:
+    cdq
+    ;cmp eax, 0
+;    jge gr
+;        mov edx, 0xffffffff
+;        jmp end_if
+;        gr:
+;        mov edx, 0
+;    end_if:
     mov    esi, DWORD [znam]
     lea esi, [esi-1]
     idiv esi
